@@ -1,0 +1,70 @@
+\documentclass{article}
+\usepackage[margin=1.25in]{geometry}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage[ruled, vlined, linesnumbered ]{algorithm2e}
+
+\title{Graph Theory: Homework 1}
+\author{Nikzad Khani}
+
+\begin{document}
+\maketitle
+
+\textbf{Problem 1}
+
+\begin{equation}
+    MM^T = A + D_V
+\end{equation}
+where $D_V$ is a diagonal matrix where the degree of the vertex defined by
+row $i$ in $M$ is the $(i, i)$ entry in $D_V$.\\
+
+\quad Let $M$ be a $q$ by $r$ size matrix and let $A$ be a $q$ by $q$ size matrix.
+Let $a_{i, j}$ be the entry in $A$ at row $i$ and column $j$. This entry
+is defined by $M_iM^T_{j}$, where $M_i$ is the row vector at $i$ and $M^T_j$ is
+a column vector in $M^T$. This product is equivalent to $M_i \cdot M_j$ since
+a column vector at $j$ in $M^T$ is equivalent to a row vector at $j$ in $M$.
+Thus, we can define $a_{i, j}$ as follows where $n$ is the length of the row
+vector.
+
+\begin{equation}
+    \forall \underset{i\neq j}{i,j} \in[1, q]\quad
+    a_{i, j} = M_i \cdot M_j = \sum_{t = 1}^{r}m_{i, t}m_{j, t}
+\end{equation}
+
+By definition of an incidence matrix, we know that each entry in $M$ will be a
+$1$ if the vertex defined by the entry's row number is incident to the edge
+defined by the entry's column number and a $0$ otherwise. When $a_{i, j}$ is
+not an entry along the diagonal of $A$, there are two possible products.
+The first product is when both $m_{i, t}$ and $m_{j, t}$ are both $1$.
+This will yield a $1$ to the sum indicative that both vertex $i$ and vertex $j$
+are connected to the same edge $t$. The second possible product is a $0$, which
+is when either $m_{i, t}$ or $m_{j, t}$ is a $1$ (indicative that one of the
+vertices is connected to edge $t$, but not the other) or when both $m_{i, t}$ and
+$m_{j, t}$ are $0$, which is indicative that neither vertex is connected to
+edge $t$. The resulting sum will be total walks of length $1$ between vertex
+$i$ and vertex $j$.
+
+\begin{equation}
+    \forall \underset{i\neq j}{i,j} \in[1, q]\quad
+    a_{i, j} = \sum_{t = 1}^{r}m_{i, t}m_{j, t}
+\end{equation}
+
+This sum is bounded by $r$, or in other words $\sum_{t = 1}^{r}m_{i, t}m_{j, t}
+\in [0, r]$.
+
+\begin{equation}
+    \forall i \in[1, q]\quad
+    d_{V {i, i}} = M_i \cdot M_i = \sum_{t = 1}^{r}m_{i, t}^2
+\end{equation}
+
+Let $d_{V {i, i}}$ be the entry at $(i, i)$ in the diagonal matrix $D_V$.
+When we take the dot product of the same row vector in the incidence matrix
+we get that each entry in the row vector will be squared then summed. Since
+each entry is $1$ or $0$, we are effectively taking the sum of all the
+entries in the row vector. Entries will only have a $1$ if the edge defined
+by its column is incident to the vertex defined by the row, thus the sum
+will give us the degree since we are just counting the total number of edges
+that are incident to vertex $i$. This will yield the some integer between $0$
+and $r$.
+\end{document}
